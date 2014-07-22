@@ -27,9 +27,7 @@ public:
 
 	void handle_resq_req_qrcode(resquer_session* resq,
 		const boost::system::error_code& error, size_t bytes_transferred);
-
-	//void handle_write(const boost::system::error_code& error);
-
+	
 private:
 	boost::asio::io_service& _io_service;
 	boost::asio::ip::tcp::acceptor _acceptor;
