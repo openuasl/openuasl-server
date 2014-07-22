@@ -22,6 +22,12 @@
     <Filter Include="Source Files\ucstream">
       <UniqueIdentifier>{1541b8a4-9c86-49d8-b25c-cede2a934149}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\openuasl\skeleton">
+      <UniqueIdentifier>{c2df8e23-a1d5-4be2-b632-0098d4e7fa20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\skeleton">
+      <UniqueIdentifier>{dfb3d679-dd3f-40ad-a235-df2c9458b57b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -44,6 +50,21 @@
     </ClCompile>
     <ClCompile Include="src\ucstream\ucstream_server.cpp">
       <Filter>Source Files\ucstream</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skeleton\BaseSession.cpp">
+      <Filter>Source Files\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skeleton\LogableSession.cpp">
+      <Filter>Source Files\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skeleton\NetworkLogger.cpp">
+      <Filter>Source Files\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skeleton\SecureBaseServer.cpp">
+      <Filter>Source Files\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skeleton\SessionManager.cpp">
+      <Filter>Source Files\skeleton</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +91,24 @@
     </ClInclude>
     <ClInclude Include="include\openuasl\session_mgr.h">
       <Filter>Header Files\openuasl</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\skeleton\SecureBaseServer.h">
+      <Filter>Header Files\openuasl\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\skeleton\BaseSession.h">
+      <Filter>Header Files\openuasl\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\skeleton\LogableSession.h">
+      <Filter>Header Files\openuasl\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\skeleton\SessionManager.h">
+      <Filter>Header Files\openuasl\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\skeleton\NetworkLogger.h">
+      <Filter>Header Files\openuasl\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\skeleton\TypeDefs.h">
+      <Filter>Header Files\openuasl\skeleton</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
