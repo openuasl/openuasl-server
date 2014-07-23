@@ -28,8 +28,7 @@ namespace skeleton{
 
 		SecureBaseServer(unsigned short port, int buf_len);
 		~SecureBaseServer();
-		void HandleAccept(LogableSession* new_session,
-			const boost::system::error_code& error);
+		
 		virtual bool Run();
 
 	protected:
@@ -41,8 +40,15 @@ namespace skeleton{
 		void SetLogManager(NetworkLogger* logmgr);
 
 		virtual std::string SetCertPassword() const = 0;
-		virtual LogableSession* AllocSession() = 0;
-		virtual void InitAcceptedSession(LogableSession* new_session) = 0;
+		
+		virtual void HandleAccept(SecureSocket* nsock,
+			const boost::system::error_code& error);
+
+		virtual void HandleHandshake(SecureSocket* nsock,
+			const boost::system::error_code& error);
+
+		virtual void ProcessRead(SecureSocket* nsock,
+			const boost::system::error_code& error) = 0;
 
 	private:
 		Acceptor _Acceptor;

@@ -10,12 +10,11 @@
 namespace openuasl{
 namespace server{
 namespace skeleton{
-
-	template <typename ID = std::string>
+		
 	class BaseSession
 	{
 	public:
-		ID _SessionId;
+		std::string _SessionId;
 		SecureSocket _Socket;
 
 	public:

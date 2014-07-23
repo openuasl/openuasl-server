@@ -7,7 +7,7 @@ namespace openuasl{
 namespace server{
 namespace skeleton{
 
-	BaseSession<std::string>::BaseSession(size_t buf_size,
+	BaseSession::BaseSession(size_t buf_size,
 		IOService& io_service, SslContext& context)
 	: _Socket(io_service, context)
 	{
@@ -15,8 +15,7 @@ namespace skeleton{
 		_BufferSize = buf_size;
 	}
 
-	template<>
-	BaseSession<std::string>::~BaseSession()
+	BaseSession::~BaseSession()
 	{
 		delete [] this->_Buffer;
 		boost::system::error_code error;
@@ -25,15 +24,14 @@ namespace skeleton{
 		_Socket.lowest_layer().close(error);
 	}
 	
-	void BaseSession<std::string>::Start()
+	void BaseSession::Start()
 	{
 		_Socket.async_handshake(boost::asio::ssl::stream_base::server,
 			boost::bind(&BaseSession::HandleHandshake, this,
 			boost::asio::placeholders::error));
 	}
-
-	template<>
-	void BaseSession<std::string>::HandleHandshake(const boost::system::error_code& error)
+		
+	void BaseSession::HandleHandshake(const boost::system::error_code& error)
 	{
 		if (!error)
 		{
@@ -48,8 +46,7 @@ namespace skeleton{
 		}
 	}
 
-	template<>
-	void BaseSession<std::string>::HandleRead(const boost::system::error_code& error, size_t bytes_transferred)
+	void BaseSession::HandleRead(const boost::system::error_code& error, size_t bytes_transferred)
 	{
 		if (!error)
 		{
@@ -64,16 +61,15 @@ namespace skeleton{
 		}
 	}
 
-	void BaseSession<std::string>::AsyncRead()
+	void BaseSession::AsyncRead()
 	{
 		_Socket.async_read_some(boost::asio::buffer(_Buffer, _BufferSize),
 				boost::bind(&BaseSession::HandleRead, this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred));
 	}
-
-	template<>
-	void BaseSession<std::string>::HandleWrite(const boost::system::error_code& error)
+		
+	void BaseSession::HandleWrite(const boost::system::error_code& error)
 	{
 		if (!error)
 		{
@@ -85,9 +81,8 @@ namespace skeleton{
 			ErrorHandling(error);
 		}
 	}
-
-	template<>
-	void BaseSession<std::string>::AsyncWrite(size_t buf_len)
+		
+	void BaseSession::AsyncWrite(size_t buf_len)
 	{
 		boost::asio::async_write(_Socket,
 				boost::asio::buffer(_Buffer, buf_len),
