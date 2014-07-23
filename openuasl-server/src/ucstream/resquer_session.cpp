@@ -1,9 +1,9 @@
 #include <openuasl/ucstream/resquer_session.h>
 #include <openuasl/ucstream/uav_session.h>
 
-namespace bssm{
-namespace blueeyes{
-namespace imgstream{
+namespace openuasl{
+namespace server{
+namespace ucstream{
 	
 	resquer_session::resquer_session(boost::asio::ip::tcp::socket* sock)
 		:_socket(sock){}
@@ -87,4 +87,4 @@ namespace imgstream{
 	}
 
 
-}}} // bssm.blueeyes.imgstream
+}}} // openuasl.server.ucstream
