@@ -86,6 +86,7 @@
     <ClCompile Include="src\main_server.cpp" />
     <ClCompile Include="src\session_app.cpp" />
     <ClCompile Include="src\session_mgr.cpp" />
+    <ClCompile Include="src\session_resquer.cpp" />
     <ClCompile Include="src\skeleton\BaseSession.cpp" />
     <ClCompile Include="src\skeleton\LogableSession.cpp" />
     <ClCompile Include="src\skeleton\NetworkLogger.cpp" />
