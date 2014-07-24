@@ -8,19 +8,18 @@ namespace openuasl{
 namespace server{
 namespace skeleton{
 	
-	SecureBaseServer::SecureBaseServer(unsigned short port, int buf_len)
+// public
+	SecureBaseServer::SecureBaseServer(unsigned short port)
 		: _Acceptor(_IOService, 
-		boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)),
+			boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)),
 		_SslContext(_IOService, boost::asio::ssl::context::sslv23),
-		_BufferLength(buf_len), 
-		_IsSetSslContext(false),
-		_IsSetLogManager(false)
-	{
+		_IsSetSslContext(false){
+
 		_SslContext.set_options(
-			
 			boost::asio::ssl::context::default_workarounds
 			| boost::asio::ssl::context::no_sslv2
 			| boost::asio::ssl::context::single_dh_use);
+
 		_SslContext.set_password_callback(
 			boost::bind(&SecureBaseServer::SetCertPassword, this));
 	}
@@ -29,38 +28,15 @@ namespace skeleton{
 	{
 
 	}
-
-	void SecureBaseServer::HandleAccept(LogableSession* new_session,
-		const boost::system::error_code& error)
-	{
-		if(!error)
-		{
-			new_session->_SessionManager = &this->_SessionManager;
-			new_session->_LogManager = this->_LogManager;
-
-			InitAcceptedSession(new_session);
-
-			new_session->Start();
-
-			new_session = AllocSession();
-			_Acceptor.async_accept(new_session->_Socket.lowest_layer(),
-			boost::bind(&SecureBaseServer::HandleAccept, this, new_session,
-			boost::asio::placeholders::error));
-
-		}else
-		{
-			delete new_session;
-		}
-	}
 	
 	bool SecureBaseServer::Run()
 	{
-		if(_IsSetSslContext && _IsSetLogManager)
+		if(_IsSetSslContext)
 		{
-			LogableSession* new_session = AllocSession();
-			_Acceptor.async_accept(new_session->_Socket.lowest_layer(),
-			boost::bind(&SecureBaseServer::HandleAccept, this, new_session,
-			boost::asio::placeholders::error));
+			SecureSocket* nsock = new SecureSocket(_IOService, _SslContext);
+			_Acceptor.async_accept(nsock->lowest_layer(),
+				boost::bind(&SecureBaseServer::HandleAccept, this, nsock,
+				boost::asio::placeholders::error));
 
 			_IOService.run();
 
@@ -70,6 +46,7 @@ namespace skeleton{
 		return false;
 	}
 
+// protected
 	void SecureBaseServer::SetSslContext(
 		std::string cert_path,
 		std::string pri_key_path, std::string dh_path)
@@ -81,13 +58,44 @@ namespace skeleton{
 
 		_IsSetSslContext = true;
 	}
-	
-	void SecureBaseServer::SetLogManager(NetworkLogger* logmgr)
-	{
-		this->_LogManager = logmgr;
 
-		_IsSetLogManager = true;
+	void SecureBaseServer::HandleAccept(SecureSocket* nsock,
+		const boost::system::error_code& error)
+	{
+		if(!error)
+		{
+			nsock->async_handshake(boost::asio::ssl::stream_base::server,
+				boost::bind(&SecureBaseServer::HandleHandshake, this, 
+				nsock, boost::asio::placeholders::error));
+			
+			nsock = new SecureSocket(_IOService, _SslContext);
+			_Acceptor.async_accept(nsock->lowest_layer(),
+				boost::bind(&SecureBaseServer::HandleAccept, this, nsock,
+				boost::asio::placeholders::error));
+
+		}else
+		{
+			delete nsock;
+
+			SecureSocket* nsock = new SecureSocket(_IOService, _SslContext);
+			_Acceptor.async_accept(nsock->lowest_layer(),
+				boost::bind(&SecureBaseServer::HandleAccept, this, nsock,
+				boost::asio::placeholders::error));
+		}
 	}
+	
+	void SecureBaseServer::HandleHandshake(SecureSocket* nsock,
+		const boost::system::error_code& error){
+			if(!error)
+			{
+				SecureBaseServer::ProcessRead(nsock, error);
+
+			}else
+			{
+				delete nsock;
+			}
+	}
+
 
 
 }}} // openuasl.server.skeleton

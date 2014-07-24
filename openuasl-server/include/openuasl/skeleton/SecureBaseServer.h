@@ -12,24 +12,16 @@
 #include <boost/asio/ssl.hpp>
 
 #include <openuasl/skeleton/TypeDefs.h>
-#include <openuasl/skeleton/LogableSession.h>
-#include <openuasl/skeleton/NetworkLogger.h>
-
 
 namespace openuasl{
 namespace server{
 namespace skeleton{
 
-	class SecureBaseServer
-	{
+	class SecureBaseServer{
 	public:
-		SessionManager<> _SessionManager;
-		NetworkLogger* _LogManager;
-
-		SecureBaseServer(unsigned short port, int buf_len);
-		~SecureBaseServer();
-		void HandleAccept(LogableSession* new_session,
-			const boost::system::error_code& error);
+		SecureBaseServer(unsigned short port);
+		virtual ~SecureBaseServer();
+		
 		virtual bool Run();
 
 	protected:
@@ -38,17 +30,21 @@ namespace skeleton{
 
 		void SetSslContext(std::string cert_path,
 			std::string pri_key_path, std::string dh_path);
-		void SetLogManager(NetworkLogger* logmgr);
-
+		
 		virtual std::string SetCertPassword() const = 0;
-		virtual LogableSession* AllocSession() = 0;
-		virtual void InitAcceptedSession(LogableSession* new_session) = 0;
+		
+		virtual void HandleAccept(SecureSocket* nsock,
+			const boost::system::error_code& error);
+
+		virtual void HandleHandshake(SecureSocket* nsock,
+			const boost::system::error_code& error);
+
+		virtual void ProcessRead(SecureSocket* nsock,
+			const boost::system::error_code& error) = 0;
 
 	private:
 		Acceptor _Acceptor;
-		int _BufferLength;
 		bool _IsSetSslContext;
-		bool _IsSetLogManager;
 	};
 
 }}} // openuasl.server.skeleton

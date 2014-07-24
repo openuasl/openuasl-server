@@ -15,8 +15,7 @@ namespace openuasl{
 namespace server{
 namespace skeleton{
 
-	class LogableSession : public BaseSession<>
-	{
+	class LogableSession : public BaseSession{
 	public:
 		SessionManager<>* _SessionManager;
 		NetworkLogger* _LogManager;
