@@ -92,6 +92,9 @@
     <ClCompile Include="src\skeleton\NetworkLogger.cpp" />
     <ClCompile Include="src\skeleton\SecureBaseServer.cpp" />
     <ClCompile Include="src\skeleton\SessionManager.cpp" />
+    <ClCompile Include="src\ucstream\ResquerSession.cpp" />
+    <ClCompile Include="src\ucstream\UavSession.cpp" />
+    <ClCompile Include="src\ucstream\UCStreamServer.cpp" />
     <ClCompile Include="src\ucstream\ucstream_server.cpp" />
     <ClCompile Include="src\ucstream\resquer_session.cpp" />
     <ClCompile Include="src\ucstream\uav_session.cpp" />
@@ -108,6 +111,9 @@
     <ClInclude Include="include\openuasl\skeleton\SecureBaseServer.h" />
     <ClInclude Include="include\openuasl\skeleton\SessionManager.h" />
     <ClInclude Include="include\openuasl\skeleton\TypeDefs.h" />
+    <ClInclude Include="include\openuasl\ucstream\ResquerSession.h" />
+    <ClInclude Include="include\openuasl\ucstream\UavSession.h" />
+    <ClInclude Include="include\openuasl\ucstream\UCStreamServer.h" />
     <ClInclude Include="include\openuasl\ucstream\ucstream_server.h" />
     <ClInclude Include="include\openuasl\ucstream\resquer_session.h" />
     <ClInclude Include="include\openuasl\ucstream\uav_session.h" />

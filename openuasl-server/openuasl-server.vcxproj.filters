@@ -57,13 +57,25 @@
     <ClCompile Include="src\skeleton\SessionManager.cpp">
       <Filter>Source Files\skeleton</Filter>
     </ClCompile>
-    <ClCompile Include="src\ucstream\UCStreamServer.cpp">
-      <Filter>Source Files\ucstream</Filter>
+    <ClCompile Include="src\session_resquer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ucstream\ucstream_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ucstream\resquer_session.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ucstream\uav_session.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ucstream\ResquerSession.cpp">
       <Filter>Source Files\ucstream</Filter>
     </ClCompile>
     <ClCompile Include="src\ucstream\UavSession.cpp">
+      <Filter>Source Files\ucstream</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ucstream\UCStreamServer.cpp">
       <Filter>Source Files\ucstream</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,13 +113,22 @@
     <ClInclude Include="include\openuasl\skeleton\TypeDefs.h">
       <Filter>Header Files\openuasl\skeleton</Filter>
     </ClInclude>
-    <ClInclude Include="include\openuasl\ucstream\UCStreamServer.h">
-      <Filter>Header Files\openuasl\ucstream</Filter>
+    <ClInclude Include="include\openuasl\ucstream\ucstream_server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\ucstream\resquer_session.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\ucstream\uav_session.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\openuasl\ucstream\ResquerSession.h">
       <Filter>Header Files\openuasl\ucstream</Filter>
     </ClInclude>
     <ClInclude Include="include\openuasl\ucstream\UavSession.h">
+      <Filter>Header Files\openuasl\ucstream</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\ucstream\UCStreamServer.h">
       <Filter>Header Files\openuasl\ucstream</Filter>
     </ClInclude>
   </ItemGroup>
