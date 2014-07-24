@@ -11,8 +11,7 @@ namespace openuasl{
 namespace server{
 namespace skeleton{
 	
-	class NetworkLogger
-	{
+	class NetworkLogger{
 	public:
 		NetworkLogger(std::string& dir);
 		~NetworkLogger();

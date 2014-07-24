@@ -11,34 +11,18 @@ namespace openuasl{
 namespace server{
 namespace skeleton{
 		
-	class BaseSession
-	{
+	class BaseSession{
 	public:
 		std::string _SessionId;
-		SecureSocket _Socket;
+		SecureSocket& _Socket;
 
 	public:
-		BaseSession(size_t buf_size, 
-			IOService& io_service, SslContext& context);
+		BaseSession(std::string& id, SecureSocket& sock, size_t buf_size);
 		virtual ~BaseSession();
 		
-		virtual void Start();
-		void HandleHandshake(const boost::system::error_code& error);
-		void HandleRead(const boost::system::error_code& error, size_t bytes_transferred);
-		void AsyncRead();
-		void HandleWrite(const boost::system::error_code& error);
-		void AsyncWrite(size_t buf_len);
+		virtual void Start() = 0;
 		
 	protected:
-		virtual void ProcessReadBuffer(size_t read_size) = 0;
-		// return : response buffer size (unit : byte)
-		virtual size_t RegisterResponseBuffer() = 0;
-		virtual void PrepareRead() = 0;
-		virtual void ErrorHandling(const boost::system::error_code& error) = 0;
-		
-	protected:
-		volatile size_t _WritedSize;
-		volatile size_t _ReadedSize;
 		size_t _BufferSize;
 		char* _Buffer;
 				

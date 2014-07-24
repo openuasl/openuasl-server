@@ -9,18 +9,17 @@ namespace server{
 namespace skeleton{
 	
 // public
-	SecureBaseServer::SecureBaseServer(unsigned short port, int buf_len)
+	SecureBaseServer::SecureBaseServer(unsigned short port)
 		: _Acceptor(_IOService, 
-		boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)),
+			boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)),
 		_SslContext(_IOService, boost::asio::ssl::context::sslv23),
-		_BufferLength(buf_len), 
-		_IsSetSslContext(false),
-		_IsSetLogManager(false)
-	{
+		_IsSetSslContext(false){
+
 		_SslContext.set_options(
 			boost::asio::ssl::context::default_workarounds
 			| boost::asio::ssl::context::no_sslv2
 			| boost::asio::ssl::context::single_dh_use);
+
 		_SslContext.set_password_callback(
 			boost::bind(&SecureBaseServer::SetCertPassword, this));
 	}
@@ -32,7 +31,7 @@ namespace skeleton{
 	
 	bool SecureBaseServer::Run()
 	{
-		if(_IsSetSslContext && _IsSetLogManager)
+		if(_IsSetSslContext)
 		{
 			SecureSocket* nsock = new SecureSocket(_IOService, _SslContext);
 			_Acceptor.async_accept(nsock->lowest_layer(),
@@ -58,13 +57,6 @@ namespace skeleton{
 		_SslContext.use_tmp_dh_file(dh_path);
 
 		_IsSetSslContext = true;
-	}
-	
-	void SecureBaseServer::SetLogManager(NetworkLogger* logmgr)
-	{
-		this->_LogManager = logmgr;
-
-		_IsSetLogManager = true;
 	}
 
 	void SecureBaseServer::HandleAccept(SecureSocket* nsock,
