@@ -8,7 +8,9 @@ namespace ucstream{
 
 	UavSession::UavSession(std::string& id, SecureSocket& sock, size_t buf_size)
 		: skeleton::BaseSession(id, sock, buf_size){}
-	
+
+	UavSession::~UavSession(){}
+
 	void UavSession::SetSerialId(char* buffer){
 		this->_SessionId = std::string(buffer);
 	}

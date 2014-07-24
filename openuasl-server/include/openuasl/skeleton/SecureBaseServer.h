@@ -13,6 +13,13 @@
 
 #include <openuasl/skeleton/TypeDefs.h>
 
+typedef boost::asio::ip::tcp::acceptor \
+	Acceptor;
+typedef boost::asio::io_service \
+	IOService;
+typedef boost::asio::ssl::context \
+	SslContext;
+
 namespace openuasl{
 namespace server{
 namespace skeleton{

@@ -10,6 +10,8 @@ namespace ucstream{
 	ResquerSession::ResquerSession(std::string& id, SecureSocket& sock, size_t buf_size)
 		:skeleton::BaseSession(id, sock, buf_size), _Uav(NULL){}
 	
+	ResquerSession::~ResquerSession(){}
+
 	void ResquerSession::Start(){
 		
 		if(this->_Uav == NULL){
@@ -56,7 +58,7 @@ namespace ucstream{
 				_Buffer[0] = uav_rep_ready;
 				_Uav->_Socket.async_write_some(
 					boost::asio::buffer(this->_Buffer, 1),
-					boost::bind(&ResquerSession::RepReady, _Uav,
+					boost::bind(&UavSession::RepReady, _Uav,
 					boost::asio::placeholders::error));
 
 			}else{

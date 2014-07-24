@@ -45,9 +45,6 @@
     <ClCompile Include="src\skeleton\BaseSession.cpp">
       <Filter>Source Files\skeleton</Filter>
     </ClCompile>
-    <ClCompile Include="src\skeleton\LogableSession.cpp">
-      <Filter>Source Files\skeleton</Filter>
-    </ClCompile>
     <ClCompile Include="src\skeleton\NetworkLogger.cpp">
       <Filter>Source Files\skeleton</Filter>
     </ClCompile>
@@ -87,9 +84,6 @@
       <Filter>Header Files\openuasl\skeleton</Filter>
     </ClInclude>
     <ClInclude Include="include\openuasl\skeleton\BaseSession.h">
-      <Filter>Header Files\openuasl\skeleton</Filter>
-    </ClInclude>
-    <ClInclude Include="include\openuasl\skeleton\LogableSession.h">
       <Filter>Header Files\openuasl\skeleton</Filter>
     </ClInclude>
     <ClInclude Include="include\openuasl\skeleton\SessionManager.h">

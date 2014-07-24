@@ -7,6 +7,11 @@
 
 #include <openuasl/skeleton/TypeDefs.h>
 
+typedef boost::shared_mutex \
+	SharedMutex;
+typedef boost::filesystem::path \
+	FilePath;
+
 namespace openuasl{
 namespace server{
 namespace skeleton{

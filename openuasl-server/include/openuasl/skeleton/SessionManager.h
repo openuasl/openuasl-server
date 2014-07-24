@@ -8,10 +8,19 @@
 #include <openuasl/skeleton/TypeDefs.h>
 #include <openuasl/skeleton/BaseSession.h>
 
+
+typedef boost::shared_mutex \
+		SharedMutex;
+typedef boost::numeric::ublas::vector<std::string> \
+		StringVector;
+
 namespace openuasl{
 namespace server{
 namespace skeleton{
 		
+	typedef boost::unordered_map<std::string, BaseSession*> \
+		SessionList;
+
 	class SessionManager{
 	public:
 		SessionList _ConnectedSessions;
