@@ -62,7 +62,6 @@ namespace ucstream{
 		const boost::system::error_code& error, size_t bytes_transferred){
 
 		if(!error){
-
 			_Resq->_Socket.async_write_some(
 				boost::asio::buffer(this->_Buffer, bytes_transferred),
 				boost::bind(&UavSession::WriteStreamming, this,
