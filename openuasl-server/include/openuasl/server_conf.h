@@ -44,7 +44,7 @@ namespace server{
 		resq_rep_ready		= 0x41,
 		resq_rep_mismatch	= 0x42,
 		resq_rep_start		= 0x43,
-		resq_rep_imgseg		= 0x44
+		resq_rep_imgseg		= 0x13
 	};
 
 #ifdef __cplusplus

@@ -7,6 +7,11 @@
 #include <string>
 #include <boost/foreach.hpp>
 
+typedef boost::unique_lock<boost::shared_mutex> \
+	UniqueLock;
+typedef boost::shared_lock<boost::shared_mutex> \
+	SharedLock;
+
 namespace openuasl{
 namespace server{
 namespace skeleton{

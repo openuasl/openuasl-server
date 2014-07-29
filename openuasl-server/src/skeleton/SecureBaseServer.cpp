@@ -88,7 +88,7 @@ namespace skeleton{
 		const boost::system::error_code& error){
 			if(!error)
 			{
-				SecureBaseServer::ProcessRead(nsock, error);
+				ProcessRead(nsock, error);
 
 			}else
 			{

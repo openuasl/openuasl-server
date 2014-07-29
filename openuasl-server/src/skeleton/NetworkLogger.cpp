@@ -5,6 +5,8 @@
 #include <boost/date_time/local_time/local_date_time.hpp>
 #include <boost/format.hpp>
 
+typedef boost::unique_lock<boost::shared_mutex> \
+	UniqueLock;
 
 namespace openuasl{
 namespace server{

@@ -7,6 +7,9 @@
 
 #include <openuasl/skeleton/TypeDefs.h>
 
+typedef boost::asio::ssl::stream<boost::asio::ip::tcp::socket> \
+		SecureSocket;
+
 namespace openuasl{
 namespace server{
 namespace skeleton{

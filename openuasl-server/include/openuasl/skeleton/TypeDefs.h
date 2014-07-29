@@ -14,7 +14,7 @@
 #include <boost/unordered_map.hpp>
 
 #include <openuasl/skeleton/BaseSession.h>
-
+/*
 typedef boost::asio::ip::tcp::acceptor \
 	Acceptor;
 typedef boost::asio::io_service \
@@ -43,5 +43,5 @@ namespace skeleton{
 
 }}} // openuasl.server.skeleton
 
-
+*/
 #endif // __OPENUASL_SERVER_SKELETON_TYPE_DEFS_H__
