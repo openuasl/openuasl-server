@@ -83,12 +83,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="src\main_server.cpp" />
-    <ClCompile Include="src\session_app.cpp" />
-    <ClCompile Include="src\session_mgr.cpp" />
-    <ClCompile Include="src\session_resquer.cpp" />
-=======
     <ClCompile Include="src\main_server.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -101,7 +95,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
->>>>>>> remotes/origin/branch_Daehyun
     <ClCompile Include="src\skeleton\BaseSession.cpp" />
     <ClCompile Include="src\skeleton\NetworkLogger.cpp" />
     <ClCompile Include="src\skeleton\BaseResquerSession.cpp" />
