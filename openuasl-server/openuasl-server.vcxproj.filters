@@ -54,13 +54,19 @@
     <ClCompile Include="src\skeleton\SessionManager.cpp">
       <Filter>Source Files\skeleton</Filter>
     </ClCompile>
-    <ClCompile Include="src\ucstream\ResquerSession.cpp">
-      <Filter>Source Files\ucstream</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ucstream\UavSession.cpp">
-      <Filter>Source Files\ucstream</Filter>
-    </ClCompile>
     <ClCompile Include="src\ucstream\UCStreamServer.cpp">
+      <Filter>Source Files\ucstream</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skeleton\BaseResquerSession.cpp">
+      <Filter>Source Files\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\skeleton\BaseUavSession.cpp">
+      <Filter>Source Files\skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ucstream\UavCamSession.cpp">
+      <Filter>Source Files\ucstream</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ucstream\ResquerCamSession.cpp">
       <Filter>Source Files\ucstream</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,13 +101,19 @@
     <ClInclude Include="include\openuasl\skeleton\TypeDefs.h">
       <Filter>Header Files\openuasl\skeleton</Filter>
     </ClInclude>
-    <ClInclude Include="include\openuasl\ucstream\ResquerSession.h">
-      <Filter>Header Files\openuasl\ucstream</Filter>
-    </ClInclude>
-    <ClInclude Include="include\openuasl\ucstream\UavSession.h">
-      <Filter>Header Files\openuasl\ucstream</Filter>
-    </ClInclude>
     <ClInclude Include="include\openuasl\ucstream\UCStreamServer.h">
+      <Filter>Header Files\openuasl\ucstream</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\skeleton\BaseResquerSession.h">
+      <Filter>Header Files\openuasl\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\skeleton\BaseUavSession.h">
+      <Filter>Header Files\openuasl\skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\ucstream\UavCamSession.h">
+      <Filter>Header Files\openuasl\ucstream</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\ucstream\ResquerCamSession.h">
       <Filter>Header Files\openuasl\ucstream</Filter>
     </ClInclude>
   </ItemGroup>

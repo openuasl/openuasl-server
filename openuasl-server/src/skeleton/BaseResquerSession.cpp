@@ -1,48 +1,48 @@
-#include <openuasl/ucstream/ResquerSession.h>
-#include <openuasl/ucstream/UavSession.h>
+#include <openuasl/skeleton/BaseResquerSession.h>
+#include <openuasl/skeleton/BaseUavSession.h>
 #include <openuasl/server_conf.h>
 
 
 namespace openuasl{
 namespace server{
-namespace ucstream{
+namespace skeleton{
 	
-	ResquerSession::ResquerSession(std::string& id, SecureSocket& sock, size_t buf_size)
+	BaseResquerSession::BaseResquerSession(std::string& id, SecureSocket& sock, size_t buf_size)
 		:skeleton::BaseSession(id, sock, buf_size), _Uav(NULL){}
 	
-	ResquerSession::~ResquerSession(){}
+	BaseResquerSession::~BaseResquerSession(){}
 
-	void ResquerSession::Start(){
+	void BaseResquerSession::Start(){
 		
 		if(this->_Uav == NULL){
 			this->_Buffer[0] = resq_rep_mismatch;
 			_Socket.async_write_some(boost::asio::buffer(this->_Buffer, 1),
-				boost::bind(&ResquerSession::RepMismatch, this,
+				boost::bind(&BaseResquerSession::RepMismatch, this,
 				boost::asio::placeholders::error));
 
 		}else{
 			this->_Buffer[0] = resq_rep_ready;
 			_Socket.async_write_some(boost::asio::buffer(_Buffer, 1),
-				boost::bind(&ResquerSession::RepReady, this,
+				boost::bind(&BaseResquerSession::RepReady, this,
 				boost::asio::placeholders::error));
 		}
 	}
 
-	void ResquerSession::SetDeviceId(char* buffer){		
+	void BaseResquerSession::SetDeviceId(char* buffer){		
 		this->_SessionId = std::string(buffer);
 	}
 
-	void ResquerSession::SetUavSession(UavSession* uav){
+	void BaseResquerSession::SetUavSession(BaseUavSession* uav){
 		this->_Uav = uav;
 	}
 
-	void ResquerSession::RepReady(const boost::system::error_code& error){
+	void BaseResquerSession::RepReady(const boost::system::error_code& error){
 
 		if(!error){
 
 			_Socket.async_read_some(
 				boost::asio::buffer(this->_Buffer, this->_BufferSize),
-				boost::bind(&ResquerSession::ReqReady, this,
+				boost::bind(&BaseResquerSession::ReqReady, this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred));
 
@@ -51,14 +51,14 @@ namespace ucstream{
 		}
 	}
 
-	void ResquerSession::ReqReady(
+	void BaseResquerSession::ReqReady(
 		const boost::system::error_code& error, size_t bytes_transferred){
 			
 			if(!error && _Buffer[0] == resq_req_ready){
 				_Buffer[0] = uav_rep_ready;
 				_Uav->_Socket.async_write_some(
 					boost::asio::buffer(this->_Buffer, 1),
-					boost::bind(&UavSession::RepReady, _Uav,
+					boost::bind(&BaseUavSession::RepReady, _Uav,
 					boost::asio::placeholders::error));
 
 			}else{
@@ -66,7 +66,7 @@ namespace ucstream{
 			}
 	}
 
-	void ResquerSession::RepMismatch(
+	void BaseResquerSession::RepMismatch(
 		const boost::system::error_code& error){
 
 			if(!error){
@@ -77,7 +77,7 @@ namespace ucstream{
 			}
 	}
 
-	void ResquerSession::RepStart(const boost::system::error_code& error){
+	void BaseResquerSession::RepStart(const boost::system::error_code& error){
 
 		if(!error){
 						
@@ -89,4 +89,4 @@ namespace ucstream{
 	}
 
 
-}}} // openuasl.server.ucstream
+}}} // openuasl.server.skeleton

@@ -12,7 +12,7 @@
 
 #include <openuasl/server_conf.h>
 #include <openuasl/skeleton/SessionManager.h>
-#include <openuasl/ucstream/ResquerSession.h>
+#include <openuasl/ucstream/ResquerCamSession.h>
 
 namespace openuasl{
 namespace server{
@@ -32,7 +32,7 @@ protected:
 // for device certificate
 	virtual void HandleMakeSession(SecureSocket* nsock, 
 			const boost::system::error_code& error, size_t bytes_transferred);
-	virtual void HandleResqReqQRCode(ResquerSession* resq,
+	virtual void HandleResqReqQRCode(ResquerCamSession* resq,
 		const boost::system::error_code& error, size_t bytes_transferred);
 
 private:

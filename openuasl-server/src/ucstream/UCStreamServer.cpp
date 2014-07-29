@@ -1,6 +1,6 @@
 #include <openuasl/ucstream/UCStreamServer.h>
-#include <openuasl/ucstream/ResquerSession.h>
-#include <openuasl/ucstream/UavSession.h>
+#include <openuasl/ucstream/ResquerCamSession.h>
+#include <openuasl/ucstream/UavCamSession.h>
 
 namespace openuasl{
 namespace server{
@@ -42,8 +42,8 @@ namespace ucstream{
 
 			if(!error){
 
-				ResquerSession* resq = NULL;
-				UavSession* uav = NULL;
+				ResquerCamSession* resq = NULL;
+				UavCamSession* uav = NULL;
 				std::string id;
 
 				switch(_Buffer[0])
@@ -52,7 +52,7 @@ namespace ucstream{
 					id = std::string(_Buffer+1);
 					std::cout << "resquer device id : " << id << std::endl;
 
-					resq = new ResquerSession(id, *nsock, NETWORK_BUF_SIZE);
+					resq = new ResquerCamSession(id, *nsock, NETWORK_BUF_SIZE);
 					
 					_ResqSmgr.InsertSession(resq);
 					
@@ -67,7 +67,7 @@ namespace ucstream{
 					id = std::string(_Buffer+1);
 					std::cout << "uav serial id : " << id << std::endl;
 
-  					uav = new UavSession(id, *nsock, UCS_IMGBUF_SIZE);
+  					uav = new UavCamSession(id, *nsock, UCS_IMGBUF_SIZE);
 					
 					_UavSmgr.InsertSession(uav);
 
@@ -83,7 +83,7 @@ namespace ucstream{
 			}
 	}
 	
-	void UCStreamServer::HandleResqReqQRCode(ResquerSession* resq,
+	void UCStreamServer::HandleResqReqQRCode(ResquerCamSession* resq,
 		const boost::system::error_code& error, size_t bytes_transferred){
 
 			if(!error){
@@ -100,7 +100,7 @@ namespace ucstream{
 					return;
 				}
 
-				UavSession* uav = static_cast<UavSession*>(
+				UavCamSession* uav = static_cast<UavCamSession*>(
 					_UavSmgr.GetSession(std::string(_Buffer+1, 64)));
 								
 				if(uav != NULL){
