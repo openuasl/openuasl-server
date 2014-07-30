@@ -39,9 +39,6 @@
     <ClCompile Include="src\session_app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\session_mgr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\skeleton\BaseSession.cpp">
       <Filter>Source Files\skeleton</Filter>
     </ClCompile>
