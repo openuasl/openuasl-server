@@ -10,20 +10,19 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
+#include <openuasl/skeleton/SecureBaseServer.h>
 
-typedef boost::asio::ssl::stream<boost::asio::ip::tcp::socket> ssl_socket;
 namespace openuasl{
 	namespace server{
+		class main_server : public skeleton::SecureBaseServer{
 
-		class main_server
-		{
 		private:
-			boost::asio::io_service& io_service_;
-			boost::asio::ip::tcp::acceptor acceptor_;
-			boost::asio::ssl::context context_;
-			enum { max_length = 1024 };
-			char _buffer[max_length];
+			skeleton::SessionManager _ResqSmgr;
+			skeleton::SessionManager _UavSmgr;
+			char _Buffer[NETWORK_BUF_SIZE];
 
+		protected:
+			virtual std::string 
 		public:
 			main_server(boost::asio::io_service& io_service, short port);
 			void start();
