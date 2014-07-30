@@ -6,16 +6,11 @@
 
 #include <openuasl/main_server.h>
 #include <openuasl/session_app.h>
-
-typedef boost::asio::ssl::stream<boost::asio::ip::tcp::socket> ssl_socket;
-
+#include <openuasl/session_uav.h>
 
 namespace openuasl{
 	namespace server{
-			main_server::main_server(boost::asio::io_service& io_service, short port) :
-		io_service_(io_service), acceptor_(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)),
-			context_(io_service, boost::asio::ssl::context::sslv23)
-		{
+			main_server::main_server(unsigned short port) : skeleton::SecureBaseServer(port){
 
 			context_.set_options(
 				boost::asio::ssl::context::default_workarounds
