@@ -10,88 +10,112 @@
 
 namespace openuasl{
 	namespace server{
-			main_server::main_server(unsigned short port) : skeleton::SecureBaseServer(port){
+		main_server::main_server(unsigned short port) : skeleton::SecureBaseServer(port){
 
-			context_.set_options(
-				boost::asio::ssl::context::default_workarounds
-				| boost::asio::ssl::context::no_sslv2
-				| boost::asio::ssl::context::single_dh_use);
-
-			context_.set_password_callback(boost::bind(&main_server::get_password, this));
-			context_.use_certificate_chain_file(CERT_CHAIN_PATH);
-			context_.use_private_key_file(CERT_PRIKEY_PATH, boost::asio::ssl::context::pem);
-			context_.use_tmp_dh_file(CERT_TMPDH_PATH);
-
-			ssl_socket* sock = new ssl_socket(io_service_, context_);
-			acceptor_.async_accept(sock->lowest_layer(),  
-				boost::bind(&main_server::handle_accept, 
-				this, sock, boost::asio::placeholders::error));
-
+			SetSslContext(CERT_CHAIN_PATH, 
+				CERT_PRIKEY_PATH, CERT_TMPDH_PATH);
 		}
 
-
-		void main_server::handle_handshake(ssl_socket * sock,const boost::system::error_code& error){
-
-			if (!error)
-			{
-				boost::system::error_code err;
-				sock->async_read_some(boost::asio::buffer(_buffer, max_length), err );
-
-				session_app *sa=NULL;
-				switch(_buffer[0])
-				{
-				case resq_req_devid:
-					resq = new resquer_session(sock);
-					resq->set_devid(_buffer+1);
-
-					printf("resquer device id : %s\n", _buffer+1);
-
-					_smgr.insert(resq);
-
-					sock->async_read_some(boost::asio::buffer(_buffer, NETWORK_BUF_SIZE),
-						boost::bind(&main_server::handle_resq_req_qrcode, this,
-						resq, boost::asio::placeholders::error,
-						boost::asio::placeholders::bytes_transferred));
-					break;
-
-				case uav_req_serial:
-					uav = new uav_session(sock);
-					uav->set_serial(_buffer+1);
-
-					printf("uav serial id : %s\n", _buffer+1); 
-
-					_smgr.insert(uav);
-					uav->start();
-					break;
-
-				default:
-					sock->shutdown(boost::asio::socket_base::shutdown_both);
-					break;
-				}
-
-				///
-
-
-				//
-			}
-			else
-			{
-				delete this;
-			}
-		}
-
-		void main_server::handle_accept(ssl_socket * sock,
-			const boost::system::error_code& error){
-
-				sock->async_handshake(boost::asio::ssl::stream_base::server,
-					boost::bind(&main_server::handle_handshake, this,sock,
-					boost::asio::placeholders::error));
-		}
-
-		std::string main_server::get_password() const {
+		std::string main_server::SetCertPassword() const {
 			return "1234";
 		}
 
-	
+
+
+		void main_server::ProcessRead(SecureSocket* nsock,
+			const boost::system::error_code& error){
+
+				if(!error){
+
+					nsock->async_read_some(
+						boost::asio::buffer(_Buffer, NETWORK_BUF_SIZE),
+						boost::bind(&UCStreamServer::HandleMakeSession, this,
+						nsock, boost::asio::placeholders::error,
+						boost::asio::placeholders::bytes_transferred));
+
+				}else{
+					delete nsock;
+				}
+		}
+
+		void main_server::HandleMakeSession(SecureSocket* nsock, 
+			const boost::system::error_code& error, size_t bytes_transferred){
+
+				if(!error){
+
+					session_app* resq = NULL;
+					session_uav* uav = NULL;
+					std::string id;
+
+					switch(_Buffer[0])
+					{
+					case resq_req_devid:
+						id = std::string(_Buffer+1);
+						std::cout << "resquer device id : " << id << std::endl;
+
+						resq = new session_app(id, *nsock, NETWORK_BUF_SIZE);
+
+						_ResqSmgr.InsertSession(resq);
+
+						nsock->async_read_some(
+							boost::asio::buffer(this->_Buffer, NETWORK_BUF_SIZE),
+							boost::bind(&main_server::HandleResqReqQRCode, this,
+							resq, boost::asio::placeholders::error,
+							boost::asio::placeholders::bytes_transferred));
+						break;
+
+					case uav_req_serial:
+						id = std::string(_Buffer+1);
+						std::cout << "uav serial id : " << id << std::endl;
+
+						uav = new session_uav(id, *nsock, UCS_IMGBUF_SIZE);
+
+						_UavSmgr.InsertSession(uav);
+
+						break;
+
+					default:
+						delete nsock;
+						break;
+					}
+
+				}else{
+					delete nsock;
+				}
+		}
+
+
+		void main_server::HandleResqReqQRCode(session_app* resq,
+			const boost::system::error_code& error, size_t bytes_transferred){
+
+				if(!error){
+					if(_Buffer[0] != resq_req_qrcode){
+						_ResqSmgr.EreaseSession(resq->_SessionId);
+						delete resq;
+
+						resq->_Socket.async_read_some(
+							boost::asio::buffer(_Buffer, NETWORK_BUF_SIZE),
+							boost::bind(&main_server::HandleResqReqQRCode, this,
+							resq, boost::asio::placeholders::error,
+							boost::asio::placeholders::bytes_transferred));
+
+						return;
+					}
+
+					session_uav* uav = static_cast<session_uav*>(
+						_UavSmgr.GetSession(std::string(_Buffer+1, 64)));
+
+					if(uav != NULL){
+						resq->SetUavSession(uav);
+						uav->SetResquerSesion(resq);
+					}
+
+					resq->Start();
+
+				}else{
+					delete resq;
+				}
+		}
+
 	}
 }
