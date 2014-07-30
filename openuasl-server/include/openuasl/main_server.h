@@ -22,15 +22,20 @@ namespace openuasl{
 			char _Buffer[NETWORK_BUF_SIZE];
 
 		protected:
-			virtual std::string 
-		public:
-			main_server(boost::asio::io_service& io_service, short port);
-			void start();
-			void handle_handshake(ssl_socket * sock,const boost::system::error_code& error);
-			void handle_accept(ssl_socket * sock,
+			virtual std::string SetCertPassword() const;
+
+			virtual void ProcessRead(SecureSocket* nsock,
 				const boost::system::error_code& error);
 
-			std::string get_password() const;
+
+			// for device certificate
+			virtual void HandleMakeSession(SecureSocket* nsock, 
+				const boost::system::error_code& error, size_t bytes_transferred);
+			virtual void HandleResqReqQRCode(ResquerCamSession* resq,
+				const boost::system::error_code& error, size_t bytes_transferred);
+
+		public:
+			main_server(unsigned short port);
 
 		};
 

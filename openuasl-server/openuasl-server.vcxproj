@@ -100,19 +100,10 @@
     <ClCompile Include="src\skeleton\BaseResquerSession.cpp" />
     <ClCompile Include="src\skeleton\SecureBaseServer.cpp" />
     <ClCompile Include="src\skeleton\SessionManager.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="src\skeleton\BaseUavSession.cpp" />
     <ClCompile Include="src\ucstream\ResquerCamSession.cpp" />
     <ClCompile Include="src\ucstream\UavCamSession.cpp" />
     <ClCompile Include="src\ucstream\UCStreamServer.cpp" />
-=======
-    <ClCompile Include="src\ucstream\ResquerSession.cpp" />
-    <ClCompile Include="src\ucstream\UavSession.cpp" />
-    <ClCompile Include="src\ucstream\UCStreamServer.cpp" />
-    <ClCompile Include="src\ucstream\ucstream_server.cpp" />
-    <ClCompile Include="src\ucstream\resquer_session.cpp" />
-    <ClCompile Include="src\ucstream\uav_session.cpp" />
->>>>>>> f250aa8c6990e04195eaf6b5fa8d9057e1e77421
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\openuasl\main_server.h">
@@ -138,19 +129,11 @@
     <ClInclude Include="include\openuasl\skeleton\SecureBaseServer.h" />
     <ClInclude Include="include\openuasl\skeleton\SessionManager.h" />
     <ClInclude Include="include\openuasl\skeleton\TypeDefs.h" />
-<<<<<<< HEAD
     <ClInclude Include="include\openuasl\skeleton\BaseUavSession.h" />
     <ClInclude Include="include\openuasl\ucstream\ResquerCamSession.h" />
     <ClInclude Include="include\openuasl\ucstream\UavCamSession.h" />
     <ClInclude Include="include\openuasl\ucstream\UCStreamServer.h" />
-=======
-    <ClInclude Include="include\openuasl\ucstream\ResquerSession.h" />
-    <ClInclude Include="include\openuasl\ucstream\UavSession.h" />
-    <ClInclude Include="include\openuasl\ucstream\UCStreamServer.h" />
-    <ClInclude Include="include\openuasl\ucstream\ucstream_server.h" />
-    <ClInclude Include="include\openuasl\ucstream\resquer_session.h" />
-    <ClInclude Include="include\openuasl\ucstream\uav_session.h" />
->>>>>>> f250aa8c6990e04195eaf6b5fa8d9057e1e77421
+
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
