@@ -49,7 +49,7 @@ namespace ucstream{
 				switch(_Buffer[0])
 				{
 				case resq_req_devid:
-					id = std::string(_Buffer+1);
+					id = std::string(_Buffer+1, 64);
 					std::cout << "resquer device id : " << id << std::endl;
 
 					resq = new ResquerCamSession(id, *nsock, NETWORK_BUF_SIZE);
@@ -64,7 +64,7 @@ namespace ucstream{
 					break;
 
 				case uav_req_serial:
-					id = std::string(_Buffer+1);
+					id = std::string(_Buffer+1, 64);
 					std::cout << "uav serial id : " << id << std::endl;
 
   					uav = new UavCamSession(id, *nsock, UCS_IMGBUF_SIZE);
