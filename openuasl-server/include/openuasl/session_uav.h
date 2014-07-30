@@ -10,43 +10,22 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
-#include "mainsv_conf.h"
-
-
-
-typedef boost::asio::ssl::stream<boost::asio::ip::tcp::socket> ssl_socket;
+#include <openuasl/skeleton/BaseResquerSession.h>
 
 namespace openuasl{
 	namespace server{
 
 		class session_app;
 
-		class session_uav{
+		class session_uav : public skeleton::BaseResquerSession{
 
-		private:
-			ssl_socket socket_;
-			enum { max_length = 1024 };
-			char data_[max_length];
-			session_app* _app;
+		public:
+			session_uav(std::string& id, SecureSocket& sock, size_t buf_size);
+			virtual ~session_uav();
 
-		public :
-			std::string _device_id;
-			session_uav(boost::asio::io_service& io_service, boost::asio::ssl::context& context);
-			ssl_socket& socket();
-			void start();
-			void set_serial(char* buffer);
-			void set_session_app(session_app* uav);
-			void handle_handshake(const boost::system::error_code& error);
-			void handle_read(const boost::system::error_code& error,
-				size_t bytes_transferred);
-			void handle_write(const boost::system::error_code& error);
-			void set_devid(char* buffer);
+		protected:
 
-			void handle_rep_ready(const boost::system::error_code& error);
-			void handle_req_ready(const boost::system::error_code& error, size_t bytes_transferred);
-
-			void handle_rep_mismatch(const boost::system::error_code& error);
-
+			virtual void RepStart(const boost::system::error_code& error);
 
 			friend class session_app;
 

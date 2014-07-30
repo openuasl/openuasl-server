@@ -54,18 +54,6 @@
     <ClCompile Include="src\skeleton\SessionManager.cpp">
       <Filter>Source Files\skeleton</Filter>
     </ClCompile>
-    <ClCompile Include="src\session_resquer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ucstream\ucstream_server.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ucstream\resquer_session.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ucstream\uav_session.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\skeleton\BaseResquerSession.cpp">
       <Filter>Source Files\skeleton</Filter>
     </ClCompile>
@@ -95,9 +83,6 @@
     <ClInclude Include="include\openuasl\server_conf.h">
       <Filter>Header Files\openuasl</Filter>
     </ClInclude>
-    <ClInclude Include="include\openuasl\session_mgr.h">
-      <Filter>Header Files\openuasl</Filter>
-    </ClInclude>
     <ClInclude Include="include\openuasl\skeleton\SecureBaseServer.h">
       <Filter>Header Files\openuasl\skeleton</Filter>
     </ClInclude>
@@ -112,15 +97,6 @@
     </ClInclude>
     <ClInclude Include="include\openuasl\skeleton\TypeDefs.h">
       <Filter>Header Files\openuasl\skeleton</Filter>
-    </ClInclude>
-    <ClInclude Include="include\openuasl\ucstream\ucstream_server.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\openuasl\ucstream\resquer_session.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\openuasl\ucstream\uav_session.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\openuasl\skeleton\BaseResquerSession.h">
       <Filter>Header Files\openuasl\skeleton</Filter>
