@@ -10,28 +10,32 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
+#include <openuasl/skeleton/SecureBaseServer.h>
 
-typedef boost::asio::ssl::stream<boost::asio::ip::tcp::socket> ssl_socket;
 namespace openuasl{
 	namespace server{
+		class main_server : public skeleton::SecureBaseServer{
 
-		class main_server
-		{
 		private:
-			boost::asio::io_service& io_service_;
-			boost::asio::ip::tcp::acceptor acceptor_;
-			boost::asio::ssl::context context_;
-			enum { max_length = 1024 };
-			char _buffer[max_length];
+			skeleton::SessionManager _ResqSmgr;
+			skeleton::SessionManager _UavSmgr;
+			char _Buffer[NETWORK_BUF_SIZE];
 
-		public:
-			main_server(boost::asio::io_service& io_service, short port);
-			void start();
-			void handle_handshake(ssl_socket * sock,const boost::system::error_code& error);
-			void handle_accept(ssl_socket * sock,
+		protected:
+			virtual std::string SetCertPassword() const;
+
+			virtual void ProcessRead(SecureSocket* nsock,
 				const boost::system::error_code& error);
 
-			std::string get_password() const;
+
+			// for device certificate
+			virtual void HandleMakeSession(SecureSocket* nsock, 
+				const boost::system::error_code& error, size_t bytes_transferred);
+			virtual void HandleResqReqQRCode(ResquerCamSession* resq,
+				const boost::system::error_code& error, size_t bytes_transferred);
+
+		public:
+			main_server(unsigned short port);
 
 		};
 

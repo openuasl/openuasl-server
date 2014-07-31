@@ -39,9 +39,6 @@
     <ClCompile Include="src\session_app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\session_mgr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\skeleton\BaseSession.cpp">
       <Filter>Source Files\skeleton</Filter>
     </ClCompile>
@@ -54,9 +51,6 @@
     <ClCompile Include="src\skeleton\SessionManager.cpp">
       <Filter>Source Files\skeleton</Filter>
     </ClCompile>
-    <ClCompile Include="src\ucstream\UCStreamServer.cpp">
-      <Filter>Source Files\ucstream</Filter>
-    </ClCompile>
     <ClCompile Include="src\skeleton\BaseResquerSession.cpp">
       <Filter>Source Files\skeleton</Filter>
     </ClCompile>
@@ -67,6 +61,9 @@
       <Filter>Source Files\ucstream</Filter>
     </ClCompile>
     <ClCompile Include="src\ucstream\ResquerCamSession.cpp">
+      <Filter>Source Files\ucstream</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ucstream\UCStreamServer.cpp">
       <Filter>Source Files\ucstream</Filter>
     </ClCompile>
   </ItemGroup>
@@ -81,9 +78,6 @@
       <Filter>Header Files\openuasl</Filter>
     </ClInclude>
     <ClInclude Include="include\openuasl\server_conf.h">
-      <Filter>Header Files\openuasl</Filter>
-    </ClInclude>
-    <ClInclude Include="include\openuasl\session_mgr.h">
       <Filter>Header Files\openuasl</Filter>
     </ClInclude>
     <ClInclude Include="include\openuasl\skeleton\SecureBaseServer.h">
@@ -101,9 +95,6 @@
     <ClInclude Include="include\openuasl\skeleton\TypeDefs.h">
       <Filter>Header Files\openuasl\skeleton</Filter>
     </ClInclude>
-    <ClInclude Include="include\openuasl\ucstream\UCStreamServer.h">
-      <Filter>Header Files\openuasl\ucstream</Filter>
-    </ClInclude>
     <ClInclude Include="include\openuasl\skeleton\BaseResquerSession.h">
       <Filter>Header Files\openuasl\skeleton</Filter>
     </ClInclude>
@@ -114,6 +105,9 @@
       <Filter>Header Files\openuasl\ucstream</Filter>
     </ClInclude>
     <ClInclude Include="include\openuasl\ucstream\ResquerCamSession.h">
+      <Filter>Header Files\openuasl\ucstream</Filter>
+    </ClInclude>
+    <ClInclude Include="include\openuasl\ucstream\UCStreamServer.h">
       <Filter>Header Files\openuasl\ucstream</Filter>
     </ClInclude>
   </ItemGroup>
