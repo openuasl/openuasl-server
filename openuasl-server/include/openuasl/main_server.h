@@ -5,18 +5,22 @@
 #ifndef __OPENUASL_SERVER_MAIN_SERVER_H__
 #define __OPENUASL_SERVER_MAIN_SERVER_H__
 
-#include <cstdlib>
-#include <iostream>
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
-#include <boost/asio/ssl.hpp>
+
+#include <openuasl/server_conf.h>
+#include <openuasl/skeleton/SessionManager.h>
+#include <openuasl/session_app.h>
 #include <openuasl/skeleton/SecureBaseServer.h>
 
 namespace openuasl{
 	namespace server{
 		class main_server : public skeleton::SecureBaseServer{
 
+
 		private:
+			skeleton::SessionManager _ResqSmgr;
+			skeleton::SessionManager _UavSmgr;
 			char _Buffer[NETWORK_BUF_SIZE];
 
 		protected:
