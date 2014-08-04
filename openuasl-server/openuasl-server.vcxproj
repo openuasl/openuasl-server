@@ -89,6 +89,7 @@
     <ClCompile Include="src\session_app.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\session_uav.cpp" />
     <ClCompile Include="src\skeleton\BaseSession.cpp" />
     <ClCompile Include="src\skeleton\NetworkLogger.cpp" />
     <ClCompile Include="src\skeleton\BaseResquerSession.cpp" />

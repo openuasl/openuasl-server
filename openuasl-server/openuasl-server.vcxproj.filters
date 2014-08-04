@@ -66,6 +66,9 @@
     <ClCompile Include="src\ucstream\UCStreamServer.cpp">
       <Filter>Source Files\ucstream</Filter>
     </ClCompile>
+    <ClCompile Include="src\session_uav.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\openuasl\main_server.h">

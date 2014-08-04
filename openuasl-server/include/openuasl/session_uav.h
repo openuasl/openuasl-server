@@ -10,6 +10,8 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
+
+#include <openuasl/server_conf.h>
 #include <openuasl/skeleton/BaseResquerSession.h>
 
 namespace openuasl{
