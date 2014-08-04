@@ -10,6 +10,6 @@ namespace server{
 		: skeleton::BaseUavSession(id, sock, buf_size){}
 
 	session_uav::~session_uav(){}
-
+	void session_uav::Start(){}
 
 }} // openuasl.server.ucstream
