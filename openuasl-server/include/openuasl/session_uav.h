@@ -12,22 +12,21 @@
 #include <boost/asio/ssl.hpp>
 
 #include <openuasl/server_conf.h>
-#include <openuasl/skeleton/BaseResquerSession.h>
+#include <openuasl/skeleton/BaseUavSession.h>
 
 namespace openuasl{
 	namespace server{
 
 		class session_app;
 
-		class session_uav : public skeleton::BaseResquerSession{
+		class session_uav : public skeleton::BaseUavSession{
 
 		public:
 			session_uav(std::string& id, SecureSocket& sock, size_t buf_size);
 			virtual ~session_uav();
+			virtual void Start();
 
 		protected:
-
-			virtual void RepStart(const boost::system::error_code& error);
 
 			friend class session_app;
 
