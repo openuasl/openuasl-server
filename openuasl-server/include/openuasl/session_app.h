@@ -14,15 +14,11 @@
 #include <openuasl/server_conf.h>
 #include <openuasl/skeleton/BaseResquerSession.h>
 
-typedef boost::asio::ssl::stream<boost::asio::ip::tcp::socket> ssl_socket;
-
 namespace openuasl{
 	namespace server{
 		class session_uav;
 
-		class session_app:public skeleton:BaseResquerSession{
-
-
+		class session_app : public skeleton::BaseResquerSession{
 		public :
 			session_app(std::string& id, SecureSocket& sock, size_t buf_size);
 			virtual ~session_app();
@@ -33,9 +29,6 @@ namespace openuasl{
 
 			friend class session_uav;
 		};
-
-
-	}
 }
 } // openuasl.server
 

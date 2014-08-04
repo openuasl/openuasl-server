@@ -17,8 +17,6 @@ namespace openuasl{
 		class main_server : public skeleton::SecureBaseServer{
 
 		private:
-			skeleton::SessionManager _ResqSmgr;
-			skeleton::SessionManager _UavSmgr;
 			char _Buffer[NETWORK_BUF_SIZE];
 
 		protected:
@@ -31,7 +29,7 @@ namespace openuasl{
 			// for device certificate
 			virtual void HandleMakeSession(SecureSocket* nsock, 
 				const boost::system::error_code& error, size_t bytes_transferred);
-			virtual void HandleResqReqQRCode(ResquerCamSession* resq,
+			virtual void HandleResqReqQRCode(session_app* resq,
 				const boost::system::error_code& error, size_t bytes_transferred);
 
 		public:
