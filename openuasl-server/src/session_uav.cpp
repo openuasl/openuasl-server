@@ -29,7 +29,7 @@ namespace openuasl{
 						boost::bind(&session_uav::WriteStreamming, this,
 						boost::asio::placeholders::error,
 						boost::asio::placeholders::bytes_transferred));
-					_Socket.async_read_some(
+					_Resq->_Socket.async_read_some(
 						boost::asio::buffer(this->_Buffer, this->_BufferSize),
 						boost::bind(&session_uav::ReadStramming, this,
 						boost::asio::placeholders::error,
@@ -49,7 +49,7 @@ namespace openuasl{
 					boost::bind(&session_uav::ReadStramming, this,
 					boost::asio::placeholders::error,
 					boost::asio::placeholders::bytes_transferred));
-				_Resq->_Socket.async_write_some(
+				_Socket.async_write_some(
 					boost::asio::buffer(this->_Buffer, bytes_transferred),
 					boost::bind(&session_uav::WriteStreamming, this,
 					boost::asio::placeholders::error,
