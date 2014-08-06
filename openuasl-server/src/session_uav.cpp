@@ -10,6 +10,7 @@ namespace openuasl{
 			: skeleton::BaseUavSession(id, sock, buf_size){}
 
 		session_uav::~session_uav(){}
+
 		void session_uav::Start(){
 			_Socket.async_read_some(
 				boost::asio::buffer(this->_Buffer, this->_BufferSize),
@@ -22,11 +23,12 @@ namespace openuasl{
 		void session_uav::ReadStramming(
 			const boost::system::error_code& error, size_t bytes_transferred){
 
-				if(!error){
+				if(!error){	
 					_Resq->_Socket.async_write_some(
 						boost::asio::buffer(this->_Buffer, bytes_transferred),
 						boost::bind(&session_uav::WriteStreamming, this,
-						boost::asio::placeholders::error));
+						boost::asio::placeholders::error,
+						boost::asio::placeholders::bytes_transferred));
 					_Socket.async_read_some(
 						boost::asio::buffer(this->_Buffer, this->_BufferSize),
 						boost::bind(&session_uav::ReadStramming, this,
@@ -50,7 +52,8 @@ namespace openuasl{
 				_Resq->_Socket.async_write_some(
 					boost::asio::buffer(this->_Buffer, bytes_transferred),
 					boost::bind(&session_uav::WriteStreamming, this,
-					boost::asio::placeholders::error));
+					boost::asio::placeholders::error,
+					boost::asio::placeholders::bytes_transferred));
 
 
 			}else{
@@ -60,4 +63,4 @@ namespace openuasl{
 
 
 	}
-} // openuasl.server.ucstream
+} 
