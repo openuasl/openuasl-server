@@ -14,53 +14,44 @@ namespace openuasl{
 		void session_uav::Start(){
 			_Socket.async_read_some(
 				boost::asio::buffer(this->_Buffer, this->_BufferSize),
-				boost::bind(&session_uav::ReadStramming, this,
+				boost::bind(&session_uav::ReaduavStreamming, this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred));
 		}
 
 
-		void session_uav::ReadStramming(
+		void session_uav::ReaduavStreamming( //오드로이드에서 읽어오는거
 			const boost::system::error_code& error, size_t bytes_transferred){
 
 				if(!error){	
 					_Resq->_Socket.async_write_some(
 						boost::asio::buffer(this->_Buffer, bytes_transferred),
-						boost::bind(&session_uav::WriteStreamming, this,
+						boost::bind(&session_uav::WriteappStreamming, this,
 						boost::asio::placeholders::error,
-						boost::asio::placeholders::bytes_transferred));
-					_Resq->_Socket.async_read_some(
-						boost::asio::buffer(this->_Buffer, this->_BufferSize),
-						boost::bind(&session_uav::ReadStramming, this,
-						boost::asio::placeholders::error,
-						boost::asio::placeholders::bytes_transferred));
+						boost::asio::placeholders::bytes_transferred)
+						);
 
 				}else{
 					delete this;
 				}
 		}
 
-		void session_uav::WriteStreamming(const boost::system::error_code& error, size_t bytes_transferred){
 
-			if(!error){
+		void session_uav::WriteappStreamming( //앱에 쓰는거
+			const boost::system::error_code& error, size_t bytes_transferred){
 
-				_Socket.async_read_some(
-					boost::asio::buffer(this->_Buffer, this->_BufferSize),
-					boost::bind(&session_uav::ReadStramming, this,
-					boost::asio::placeholders::error,
-					boost::asio::placeholders::bytes_transferred));
-				_Socket.async_write_some(
-					boost::asio::buffer(this->_Buffer, bytes_transferred),
-					boost::bind(&session_uav::WriteStreamming, this,
-					boost::asio::placeholders::error,
-					boost::asio::placeholders::bytes_transferred));
+				if(!error){
+					_Socket.async_read_some(
+						boost::asio::buffer(this->_Buffer, this->_BufferSize),
+						boost::bind(&session_uav::ReaduavStreamming, this,
+						boost::asio::placeholders::error,
+						boost::asio::placeholders::bytes_transferred)
+						);
 
-
-			}else{
-				delete this;
-			}
+				}else{
+					delete this;
+				}
 		}
-
 
 	}
 } 

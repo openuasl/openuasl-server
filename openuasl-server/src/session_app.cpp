@@ -8,6 +8,10 @@ namespace openuasl{
 		:skeleton::BaseResquerSession(id, sock, buf_size){}
 
 		session_app::~session_app(){}
-		void session_app::Start(){}
+		void session_app::Start(){
+		
+		
+		
+		}
 
 }}

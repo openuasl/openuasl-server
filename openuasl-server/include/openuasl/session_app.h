@@ -17,9 +17,11 @@ namespace openuasl{
 		public :
 			session_app(std::string& id, SecureSocket& sock, size_t buf_size);
 			virtual ~session_app();
-			virtual void Start();
 
 		protected:
+			virtual void RepStart(const boost::system::error_code& error);
+			void ReadappStreamming(const boost::system::error_code& error, size_t bytes_transferred);
+			void WriteuavStreamming(const boost::system::error_code& error, size_t bytes_transferred);
 			friend class session_uav;
 		};
 }
