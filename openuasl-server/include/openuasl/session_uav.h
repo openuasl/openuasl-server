@@ -25,8 +25,6 @@ namespace openuasl{
 			void ReadStramming(const boost::system::error_code& error, size_t bytes_transferred);
 			void WriteStreamming(const boost::system::error_code& error, size_t bytes_transferred);
 
-		protected:
-
 			friend class session_app;
 
 		};

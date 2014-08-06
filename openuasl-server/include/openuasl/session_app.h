@@ -5,13 +5,8 @@
 #ifndef __OPENUASL_SERVER_SESSION_APP_H__
 #define __OPENUASL_SERVER_SESSION_APP_H__
 
-#include <cstdlib>
-#include <iostream>
-#include <boost/bind.hpp>
 #include <boost/asio.hpp>
-#include <boost/asio/ssl.hpp>
-
-#include <openuasl/server_conf.h>
+#include <boost/bind.hpp>
 #include <openuasl/skeleton/BaseResquerSession.h>
 
 namespace openuasl{
