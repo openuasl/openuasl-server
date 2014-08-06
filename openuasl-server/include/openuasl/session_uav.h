@@ -2,16 +2,13 @@
 #pragma once
 #endif // _WIN32
 
-#ifndef __OPENUASL_SERVER_SESSION_UAV_H__
-#define __OPENUASL_SERVER_SESSION_UAV_H__
+#ifndef __OPENUASL_SERVER_UCSTREAM_UAV_CAM_SESSION_H__
+#define __OPENUASL_SERVER_UCSTREAM_UAV_CAM_SESSION_H__
 
-#include <cstdlib>
-#include <iostream>
-#include <boost/bind.hpp>
+
 #include <boost/asio.hpp>
-#include <boost/asio/ssl.hpp>
+#include <boost/bind.hpp>
 
-#include <openuasl/server_conf.h>
 #include <openuasl/skeleton/BaseUavSession.h>
 
 namespace openuasl{
