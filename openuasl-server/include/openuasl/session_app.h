@@ -21,7 +21,7 @@ namespace openuasl{
 		protected:
 			virtual void RepStart(const boost::system::error_code& error);
 			void ReadappStreamming(const boost::system::error_code& error, size_t bytes_transferred);
-			void WriteuavStreamming(const boost::system::error_code& error, size_t bytes_transferred);
+			void WriteuavStreamming(const boost::system::error_code& error);
 			friend class session_uav;
 		};
 }

@@ -23,7 +23,7 @@ namespace openuasl{
 			virtual ~session_uav();
 			virtual void Start();
 			void ReaduavStreamming(const boost::system::error_code& error, size_t bytes_transferred);
-			void WriteappStreamming(const boost::system::error_code& error, size_t bytes_transferred);
+			void WriteappStreamming(const boost::system::error_code& error);
 
 			friend class session_app;
 

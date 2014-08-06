@@ -17,7 +17,7 @@ namespace openuasl{
 
 				_Uav->Start();
 
-				_Socket.async_write_some(
+				_Socket.async_read_some(
 					boost::asio::buffer(this->_Buffer, this->_BufferSize),
 					boost::bind(&session_app::ReadappStreamming, this,
 					boost::asio::placeholders::error,
@@ -38,8 +38,7 @@ namespace openuasl{
 					_Uav->_Socket.async_write_some(
 						boost::asio::buffer(this->_Buffer, bytes_transferred),
 						boost::bind(&session_app::WriteuavStreamming, this,
-						boost::asio::placeholders::error,
-						boost::asio::placeholders::bytes_transferred));
+						boost::asio::placeholders::error));
 
 				}else{
 					delete this;
@@ -49,7 +48,7 @@ namespace openuasl{
 
 
 		void session_app::WriteuavStreamming(
-			const boost::system::error_code& error, size_t bytes_transferred){
+			const boost::system::error_code& error){
 
 				if(!error){
 
