@@ -25,6 +25,8 @@ namespace openuasl{
 			session_uav(std::string& id, SecureSocket& sock, size_t buf_size);
 			virtual ~session_uav();
 			virtual void Start();
+			void ReadStramming(const boost::system::error_code& error, size_t bytes_transferred);
+			void WriteStreamming(const boost::system::error_code& error, size_t bytes_transferred);
 
 		protected:
 
