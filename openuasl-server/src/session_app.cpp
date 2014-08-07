@@ -10,12 +10,10 @@ namespace openuasl{
 		session_app::~session_app(){}
 
 		void session_app::RepStart(const boost::system::error_code& error){
-
-			BaseResquerSession::RepStart(error);
-
+			
 			if(!error){
 
-				_Uav->Start();
+				BaseResquerSession::RepStart(error);
 
 				_Socket.async_read_some(
 					boost::asio::buffer(this->_Buffer, this->_BufferSize),
