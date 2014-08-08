@@ -5,16 +5,18 @@
 #ifndef __OPENUASL_SERVER_MAIN_SERVER_H__
 #define __OPENUASL_SERVER_MAIN_SERVER_H__
 
-#include <cstdlib>
-#include <iostream>
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
-#include <boost/asio/ssl.hpp>
+
+#include <openuasl/server_conf.h>
+#include <openuasl/skeleton/SessionManager.h>
+#include <openuasl/session_app.h>
 #include <openuasl/skeleton/SecureBaseServer.h>
 
 namespace openuasl{
 	namespace server{
 		class main_server : public skeleton::SecureBaseServer{
+
 
 		private:
 			skeleton::SessionManager _ResqSmgr;
@@ -31,7 +33,7 @@ namespace openuasl{
 			// for device certificate
 			virtual void HandleMakeSession(SecureSocket* nsock, 
 				const boost::system::error_code& error, size_t bytes_transferred);
-			virtual void HandleResqReqQRCode(ResquerCamSession* resq,
+			virtual void HandleResqReqQRCode(session_app* resq,
 				const boost::system::error_code& error, size_t bytes_transferred);
 
 		public:

@@ -1,8 +1,3 @@
-#include <cstdlib>
-#include <iostream>
-#include <boost/bind.hpp>
-#include <boost/asio.hpp>
-#include <boost/asio/ssl.hpp>
 
 #include <openuasl/main_server.h>
 #include <openuasl/session_app.h>
@@ -29,7 +24,7 @@ namespace openuasl{
 
 					nsock->async_read_some(
 						boost::asio::buffer(_Buffer, NETWORK_BUF_SIZE),
-						boost::bind(&UCStreamServer::HandleMakeSession, this,
+						boost::bind(&main_server::HandleMakeSession, this,
 						nsock, boost::asio::placeholders::error,
 						boost::asio::placeholders::bytes_transferred));
 
