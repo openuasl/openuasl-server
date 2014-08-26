@@ -24,7 +24,9 @@ namespace ucstream{
 	protected:
 		
 		virtual void RepStart(const boost::system::error_code& error);
-		
+		virtual void ReqEnd(const boost::system::error_code& error, size_t bytes_transferred);
+		virtual void RepEnd(const boost::system::error_code& error);
+
 		friend class UavCamSession;
 	};
 
